@@ -109,6 +109,7 @@
     10.0.0.181 = ip ของฐานข้อมูล
     3333 = port ที่เชื่อมต่อ database ของเรา
 
+## ส่วนนี้ เป็นการ config เพื่อให้สามารถ monitor mysql server ได้มากกว่า 1 ตัว ถ้าเรามีแค่ตัวเดียว ข้ามไปได้เลย
 และหากเราต้องการจะ monitor mysql มากกว่า 1 server ให้เอาเครื่องหมาย # หน้าบรรทัดที่ 13 - 20 ออก (ดูการจัดตำแหน่ง ให้ตรงกันด้วย มีผล) และแก้ค่าการเชื่อมต่อ database ครับ
 
       # mysqlexporter2:
@@ -121,6 +122,37 @@
       #   - "DATA_SOURCE_NAME=root:212224@(mariadb-slave:3306)/"
 
 มีกี่ server ก็ Copy ข้อความด้านบน วางลงต่อกันลงมาเรื่อย ๆ เลยครับ สิ่งสำคัญที่ต้องแก้คือ ตรง mysqlexporter2 เปลี่ยนเป็น  mysqlexporter3 mysqlexporter4 อะไรก็ว่าไปครับ 
+
+จากนั้น ทำการแก้ไขไฟล์ prothemeus.yml ด้วย editor ที่เราถนัด
+
+      # - job_name: mysql_server2
+      #   metrics_path: /metrics
+      #   scrape_interval: 10s
+      #   scrape_timeout: 10s
+      #   static_configs:
+      #     - targets: ["mysqlexporter2:9104"]
+  
+  
+  [![2020-06-25-9-52-03.png](https://i.postimg.cc/90FKfxX4/2020-06-25-9-52-03.png)](https://postimg.cc/Q9w04JTs)
+  
+  
+  เอาเครื่องหมาย # หน้า บรรทัดที่ 12 - 17 ออก
+  เราจะ monitor กี่เครื่อง ตัว mysql exportor มีกี่เครื่อง ก็ copy ตามด้านบน มาวาง ตามจำนวนเครื่องที่จะ monitor ครับ 
+  โดยส่วนที่เราจะต้องเปลี่ยนคือ
+  
+  1. job_name ตั้งเป็นอะไรก็ได้ ให้เราเข้าใจครัรบ
+  
+    - job_name: mysql_server2
+  
+  2. targets
+    - targets: ["mysqlexporter2:9104"]
+  
+  จะต้องตรงกันกับชื่อ Container ของ mysql_exportor ที่เรากำหนดไว้ในไฟล์ docker-compose.yml ครับผม
+  
+  จากนั้น save ครับ
+
+## จบส่วนของการ config เพื่อให้สามารถ monitor mysql server ได้มากกว่า 1 ตัว
+
 
 แก้แค่นี้แหละครับ จากนั้น save ครับ
 
