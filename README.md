@@ -26,6 +26,13 @@
 
 แก้แค่นี้แหละครับ จากนั้น save ครับ
 
+หมายเหตุ : ถ้าไม่อยากใช้ User root หรือ user เดิมในระบบ ให้สร้าง user ขึ้นมาใหม่ครับ
+
+    CREATE USER 'exporter'@'%' IDENTIFIED BY 'XXXXXXXX' WITH MAX_USER_CONNECTIONS 3;
+    GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'%';
+    
+   
+
 [![2020-06-25-7-18-52.png](https://i.postimg.cc/s2xQY8s7/2020-06-25-7-18-52.png)](https://postimg.cc/hJFtg2Jt)
 
 #### จากนั้นทดสอบ ว่ามันทำงานได้ไหม
@@ -108,6 +115,13 @@
     123456 = password ของฐานข้อมูล
     10.0.0.181 = ip ของฐานข้อมูล
     3333 = port ที่เชื่อมต่อ database ของเรา
+    
+หมายเหตุ : ถ้าไม่อยากใช้ User root หรือ user เดิมในระบบ ให้สร้าง user ขึ้นมาใหม่ครับ
+
+    CREATE USER 'exporter'@'%' IDENTIFIED BY 'XXXXXXXX' WITH MAX_USER_CONNECTIONS 3;
+    GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'%';
+    
+    
 
 ## ส่วนนี้ เป็นการ config เพื่อให้สามารถ monitor mysql server ได้มากกว่า 1 ตัว ถ้าเรามีแค่ตัวเดียว ข้ามไปได้เลย
 และหากเราต้องการจะ monitor mysql มากกว่า 1 server ให้เอาเครื่องหมาย # หน้าบรรทัดที่ 13 - 20 ออก (ดูการจัดตำแหน่ง ให้ตรงกันด้วย มีผล) และแก้ค่าการเชื่อมต่อ database ครับ
