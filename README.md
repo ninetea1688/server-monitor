@@ -225,7 +225,7 @@
  
 แต่เราต้องดูด้วยว่า dashboard นั้น supports datasource ที่เป็น prothemeus ไหม
 
-[![2020-06-25-9-34-35.png](https://i.postimg.cc/XJNQybbJ/2020-06-25-9-34-35.png)](https://postimg.cc/cKjQVP6y)
+[![2020-06-25-9-42-33.png](https://i.postimg.cc/KjMLtb8C/2020-06-25-9-42-33.png)](https://postimg.cc/CnwzVWD4)
 
 
 เข้าไปดูแรก ๆ กราฟอาจจะ ไม่เห็นอะไรขยับ ไม่ต้องตกใจ ให้ไปเปลี่ยน Time Rang ของมันก่อน อยู่ที มุมขวาบน ตรงคำว่า
