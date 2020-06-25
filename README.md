@@ -145,6 +145,7 @@
     - job_name: mysql_server2
   
   2. targets
+  
     - targets: ["mysqlexporter2:9104"]
   
   จะต้องตรงกันกับชื่อ Container ของ mysql_exportor ที่เรากำหนดไว้ในไฟล์ docker-compose.yml ครับผม
