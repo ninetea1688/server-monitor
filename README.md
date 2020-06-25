@@ -209,8 +209,13 @@
 
 ในหน้า Import ตรงส่วนของ Import via grafana.com ให้ใส่เลข 7362 เพื่อ โหลด กราฟของ Node Exporter Full เข้ามาครับ
 
-[![2020-06-25-9-15-00.png](https://i.postimg.cc/hjmNpnY0/2020-06-25-9-15-00.png)](https://postimg.cc/R6MPZk43)
+[![2020-06-25-9-26-00.png](https://i.postimg.cc/xd6dnvjZ/2020-06-25-9-26-00.png)](https://postimg.cc/JyB8QBk3)
 
 จากนั้น คลิ๊กที่ load ครับ ระบบจะพาเรามาที่หน้า การตั้งค่าการ Import อีกหน้า ในส่วนของ Prometheus ให้เราเลือก Datasource ของ Prothemeus ที่เรากำหนดไว้ตะกี๊ครับ จากนั้น คลิ๊กที่ Import
 
-[![2020-06-25-9-19-52.png](https://i.postimg.cc/JzB3yhHK/2020-06-25-9-19-52.png)](https://postimg.cc/v4bxkbz6)
+[![2020-06-25-9-26-35.png](https://i.postimg.cc/25SZQ8VP/2020-06-25-9-26-35.png)](https://postimg.cc/Xrtq3WK8)
+
+เสร็จแล้วครับ ระบบพาเรามาที่หน้า Graph Daseboard Monitor ตัว Server MySQL  ของเราด้วย MySQL Overview
+
+### แต่เด๋วก่อนนนนนนนนนนน บัก 1860 กับ 7362 มันคืออิหยัง มาแต่ไสวะ 
+
