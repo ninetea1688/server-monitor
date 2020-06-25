@@ -1,4 +1,4 @@
-# การทำระบบ Monitor Server * MySQL ง่าย ๆ ด้วย Docker (grafana + prometheus + node exportor + mysql exportor)
+# การทำระบบ Monitor Server & MySQL ง่าย ๆ ด้วย Docker (grafana + prometheus + node exportor + mysql exportor)
 ## คู่มือนี้ มี 2 แบบ 
 1. ใช้ไปเลย บ่อยากเข้าใจหยัง
 2. มันเฮ็ดงานจั่งใด๋วะ
