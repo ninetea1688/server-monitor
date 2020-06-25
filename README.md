@@ -3,6 +3,11 @@
 1. ใช้ไปเลย บ่อยากเข้าใจหยัง
 2. มันเฮ็ดงานจั่งใด๋วะ
 
+### ความต้องการเบื้องต้นของระบบ
+    docker
+    docker-compose
+    git
+
 ### คู่มือแบบที่ 1
 
     git clone https://github.com/cybernude/server-monitor.git
@@ -82,4 +87,130 @@
 
 ##### จบ คู่มือ แบบ ที่ 1
 
+## หากท่านไม่ต้องการอะไรเพิ่ม ไม่ต้องการเข้าใจอะไร ก็เสร็จเรียบร้อยแล้วครับ ไม่ต้องเลื่อนลงไปอ่าน คู่มือแบบที่ 2 
 
+## หากท่านต้องการเข้าใจการทำงาน ของ grafana , prothemeus เป็นยังไง เพิ่มกราฟ มายังไง จะ monitor mysql มากกว่า 1 server ทำแบบไหน จะอยู่ในคู่มือ แบบที่ 2 นะครับ
+
+
+
+### คู่มือแบบที่ 2
+
+    git clone https://github.com/cybernude/server-monitor.git
+    cd server-monitor
+    
+#### จากนั้น ทำการแก้ไขทำการแก้ไขไฟล์  docker-compose.yml ด้วย editor ที่ถนัด
+แก้ไขค่าการเชื่อมต่อ database ของเรา จะอยู่ประมาณบรรทัดที่ 12
+
+    - "DATA_SOURCE_NAME=root:123456@(10.0.0.181:3333)/"
+
+
+    root = user ของฐานข้อมูล
+    123456 = password ของฐานข้อมูล
+    10.0.0.181 = ip ของฐานข้อมูล
+    3333 = port ที่เชื่อมต่อ database ของเรา
+
+และหากเราต้องการจะ monitor mysql มากกว่า 1 server ให้เอาเครื่องหมาย # หน้าบรรทัดที่ 13 - 20 ออก (ดูการจัดตำแหน่ง ให้ตรงกันด้วย มีผล) และแก้ค่าการเชื่อมต่อ database ครับ
+
+      # mysqlexporter2:
+      #   image: prom/mysqld-exporter
+      #   networks:
+      #     - grafana-network
+      #   ports: 
+      #   - "9104:9104"
+      #   environment: 
+      #   - "DATA_SOURCE_NAME=root:212224@(mariadb-slave:3306)/"
+
+มีกี่ server ก็ Copy ข้อความด้านบน วางลงต่อกันลงมาเรื่อย ๆ เลยครับ สิ่งสำคัญที่ต้องแก้คือ ตรง mysqlexporter2 เปลี่ยนเป็น  mysqlexporter3 mysqlexporter4 อะไรก็ว่าไปครับ 
+
+แก้แค่นี้แหละครับ จากนั้น save ครับ
+
+[![2020-06-25-7-18-52.png](https://i.postimg.cc/s2xQY8s7/2020-06-25-7-18-52.png)](https://postimg.cc/hJFtg2Jt)
+
+#### จากนั้นทดสอบ ว่ามันทำงานได้ไหม
+
+    docker-compose up
+
+จะเจอหน้าจอดำ ๆ กะข้อความอิหยังบุ๊ แหล่นล้าย ๆ ประมาณนี้
+
+[![2020-06-25-7-25-00.png](https://i.postimg.cc/cLH42n2N/2020-06-25-7-25-00.png)](https://postimg.cc/crpS8rdD)
+
+
+จากนั้นนั้น เปิด browser ที่เราถนัด ใส่ url = http://ip_server:3000
+
+    ip_server = ip ของ server ที่เราติดตั้งตัว server monitor นี้
+
+จะเจอหน้าจอ login
+    
+    user = admin
+    password = admin
+    
+จากนั้น เลือกกราฟ ที่จะเราจะ monitor ครับ ผมใส่มาให้แล้ว 2 กราฟคือ
+1. MySQL Overview สำหรับการ monitor mysql server ของเราครับ
+2. Node Exporter Full ไว้สำหรับ monitor ตัวเครื่อง server ของเราครับ
+
+แต่เดี๋ยวเรามาดูกันว่า ไอ้สองกราฟนี้ มันมายังไงครับ หลังจากเรา Login เข้ามา ที่หน้าแรก
+1. เริ่มแรก ผม add Data Source เข้ามาก่อน ตามภาพ
+
+[![2020-06-25-8-50-35.png](https://i.postimg.cc/ryW4THWR/2020-06-25-8-50-35.png)](https://postimg.cc/qgJqXj1p)
+
+หรือไปที่ รูปเครื่องหมายฟันเฟือง ตั้งค่า Setting -> Data Source
+
+[![2020-06-25-8-54-09.png](https://i.postimg.cc/cLDgTGq2/2020-06-25-8-54-09.png)](https://postimg.cc/VJCkLTkW)
+
+ที่หน้า Add Data Source เลือก Prothemeus 
+
+[![2020-06-25-8-55-37.png](https://i.postimg.cc/prd3fjKg/2020-06-25-8-55-37.png)](https://postimg.cc/ygwfBkQP)
+
+จากนั้นในหน้า 
+
+    Data Sources / Prometheus
+
+
+
+ในส่วนของ HTTP ตรงช่อง url ใส่ 
+    http://prometheus:9090
+
+
+[![2020-06-25-8-59-38.png](https://i.postimg.cc/3JNdRb0Z/2020-06-25-8-59-38.png)](https://postimg.cc/hfFSZsrJ)
+
+โดยที่ prometheus เป็นชื่อของ container (เปรียบเสมือนชื่อเครื่อง ในวงของ docker)  ผมกำหนดไว้ใน docker-compose.yml บรรทัดที่ 29
+
+จากนั้นเลื่อนลงมา คลิ๊กที่  Save & Test ครับ ถ้าเราตั้งค่าถูก มันจะขึ้น
+
+    Data source is working
+
+เป็นสีเขียว ๆ ครับ
+
+[![2020-06-25-9-05-00.png](https://i.postimg.cc/Gpw2XL7M/2020-06-25-9-05-00.png)](https://postimg.cc/nX2pzJt7)
+
+เสร็จแล้วครับ การ Set Datasource ของ grafana เพื่อเรียกใช้งาน prothemeus
+
+ต่อไป เราจะทำการ Import Graph Dashboard ที่เราต้องการจะ Monitor เข้ามาครับ ในที่นี้ จะประกอบไปด้วยกราฟ 2 แบบ คือ Node Exportor สำหรับ Monitor ตัว Server ของเรา และ MySQL ครับ
+1. ไปที่ เครื่องหมาย + เลือก Import
+
+[![2020-06-25-9-08-14.png](https://i.postimg.cc/3RNPppXz/2020-06-25-9-08-14.png)](https://postimg.cc/MMkPJnrY)
+
+ในหน้า Import ตรงส่วนของ Import via grafana.com ให้ใส่เลข 1860 เพื่อ โหลด กราฟของ Node Exporter Full เข้ามาครับ
+
+[![2020-06-25-9-15-00.png](https://i.postimg.cc/hjmNpnY0/2020-06-25-9-15-00.png)](https://postimg.cc/R6MPZk43)
+
+จากนั้น คลิ๊กที่ load ครับ ระบบจะพาเรามาที่หน้า การตั้งค่าการ Import อีกหน้า ในส่วนของ Prometheus ให้เราเลือก Datasource ของ Prothemeus ที่เรากำหนดไว้ตะกี๊ครับ จากนั้น คลิ๊กที่ Import
+
+[![2020-06-25-9-19-52.png](https://i.postimg.cc/JzB3yhHK/2020-06-25-9-19-52.png)](https://postimg.cc/v4bxkbz6)
+
+
+เสร็จแล้วครับ ระบบพาเรามาที่หน้า Graph Daseboard Monitor ตัว Server  ของเราด้วย Node Exportor
+
+ต่อไป เราจะ Import Graph Dashboard ของตัว MySQL เข้ามาครับ
+
+2. ไปที่ เครื่องหมาย + เลือก Import
+
+[![2020-06-25-9-08-14.png](https://i.postimg.cc/3RNPppXz/2020-06-25-9-08-14.png)](https://postimg.cc/MMkPJnrY)
+
+ในหน้า Import ตรงส่วนของ Import via grafana.com ให้ใส่เลข 7362 เพื่อ โหลด กราฟของ Node Exporter Full เข้ามาครับ
+
+[![2020-06-25-9-15-00.png](https://i.postimg.cc/hjmNpnY0/2020-06-25-9-15-00.png)](https://postimg.cc/R6MPZk43)
+
+จากนั้น คลิ๊กที่ load ครับ ระบบจะพาเรามาที่หน้า การตั้งค่าการ Import อีกหน้า ในส่วนของ Prometheus ให้เราเลือก Datasource ของ Prothemeus ที่เรากำหนดไว้ตะกี๊ครับ จากนั้น คลิ๊กที่ Import
+
+[![2020-06-25-9-19-52.png](https://i.postimg.cc/JzB3yhHK/2020-06-25-9-19-52.png)](https://postimg.cc/v4bxkbz6)
