@@ -282,4 +282,12 @@
 
 จากนั้น ลองเรียกใช้งานอีกทีครับผม
 
+กรณี ที่เราจะ monitor mysql มากกว่า 1 server ในหน้า mysql overviews ให้เราเลือกตรงส่วนของ host ครับ มันจะมี host มาให้เลือก ตามที่เรา config ไว้ในไฟล์ prothemeus.yml ครับผม
+
+[![Screen-Shot-2563-06-25-at-10-03-21.png](https://i.postimg.cc/9FcZr6jg/Screen-Shot-2563-06-25-at-10-03-21.png)](https://postimg.cc/HjPVNPnb)
+
+[![Screen-Shot-2563-06-25-at-10-03-36.png](https://i.postimg.cc/90CRw7sw/Screen-Shot-2563-06-25-at-10-03-36.png)](https://postimg.cc/njSc6CFn)
+
+
+
 #####เสร็จเรียบร้อยแล้วครับ คู่มือแบบที่ 2
