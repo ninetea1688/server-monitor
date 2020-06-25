@@ -5,8 +5,9 @@
 
 ### คู่มือแบบที่ 1
 
-git clone https://github.com/cybernude/server-monitor.git
-cd server-monitor
+    git clone https://github.com/cybernude/server-monitor.git
+    cd server-monitor
+    
 #### จากนั้น ทำการแก้ไขทำการแก้ไขไฟล์  docker-compose.yml ด้วย editor ที่ถนัด
 แก้ไขค่าการเชื่อมต่อ database ของเรา จะอยู่ประมาณบรรทัดที่ 12
     - "DATA_SOURCE_NAME=root:123456@(10.0.0.181:3333)/"
