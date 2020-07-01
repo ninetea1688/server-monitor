@@ -12,6 +12,7 @@
 
     git clone https://github.com/cybernude/server-monitor.git
     cd server-monitor
+    chmod -R 777 grafana
     
 #### จากนั้น ทำการแก้ไขทำการแก้ไขไฟล์  docker-compose.yml ด้วย editor ที่ถนัด
 แก้ไขค่าการเชื่อมต่อ database ของเรา จะอยู่ประมาณบรรทัดที่ 12
@@ -104,6 +105,7 @@
 
     git clone https://github.com/cybernude/server-monitor.git
     cd server-monitor
+    chmod -R 777 grafana
     
 #### จากนั้น ทำการแก้ไขทำการแก้ไขไฟล์  docker-compose.yml ด้วย editor ที่ถนัด
 แก้ไขค่าการเชื่อมต่อ database ของเรา จะอยู่ประมาณบรรทัดที่ 12
